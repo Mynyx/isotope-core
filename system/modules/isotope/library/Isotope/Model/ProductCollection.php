@@ -1606,7 +1606,7 @@ abstract class ProductCollection extends TypeAgent
             return $this->arrData['uniqid'];
         }
 
-        return uniqid('', true);
+        return md5(uniqid(mt_rand(), true));
     }
 
     /**
