@@ -284,12 +284,7 @@ class Cart extends ProductCollection implements
             $objConfig = Config::findByRootPageOrFallback($objPage->rootId);
             $objCart   = new static();
 
-            $cookieHash = FE_USER_LOGGED_IN === true ? null : sha1(
-                session_id()
-                . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? \Environment::get('ip') : '')
-                . $storeId
-                . static::$strCookie
-            );
+            $cookieHash = FE_USER_LOGGED_IN === true ? null : sha1(uniqid(mt_rand(), true));
 
             // Can't call the individual rows here, it would trigger markModified and a save()
             $objCart->setRow(array_merge($objCart->row(), array(
